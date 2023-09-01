@@ -21,9 +21,11 @@ public class ApiGatewayConfig  {
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
-                .route("MICROSERVICESBLOG-SERVICE", r -> r.path("/auth/**")
+                .route("MICROSERVICESBLOG-SERVICE", r -> r.path("/blog-auth/**")
+                        .filters(f -> f.rewritePath("/blog-auth/(?<segment>.*)", "/auth/${segment}"))
                         .uri("lb://MICROSERVICESBLOG-SERVICE"))
-                .route("MICROSERVICESBLOG-SERVICE", r -> r.path("/blog/**")
+                .route("MICROSERVICESBLOG-SERVICE", r -> r.path("/blog-crud/**")
+                        .filters(f -> f.rewritePath("/blog-crud/(?<segment>.*)", "/blog/${segment}"))
                         .uri("lb://MICROSERVICESBLOG-SERVICE"))
                 .build();
     }
