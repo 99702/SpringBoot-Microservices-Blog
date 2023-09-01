@@ -17,13 +17,14 @@ import org.springframework.context.annotation.Configuration;
 public class ApiGatewayConfig  {
 
 
+
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
-                .route("LOGIN-BLOG-SERVICE", r -> r.path("/auth/**")
-                        .uri("lb://LOGIN-BLOG-SERVICE"))
-                .route("blog-service", r -> r.path("/blog/**")
-                        .uri("lb://LOGIN-BLOG-SERVICE"))
+                .route("MICROSERVICESBLOG-SERVICE", r -> r.path("/auth/**")
+                        .uri("lb://MICROSERVICESBLOG-SERVICE"))
+                .route("MICROSERVICESBLOG-SERVICE", r -> r.path("/blog/**")
+                        .uri("lb://MICROSERVICESBLOG-SERVICE"))
                 .build();
     }
 
