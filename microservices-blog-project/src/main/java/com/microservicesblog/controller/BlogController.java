@@ -24,7 +24,6 @@ public class BlogController {
     }
 
     @PostMapping(PathConstant.CREATE)
-    @PreAuthorize(HasAuthorityConstant.MODIFY_BLOG)
     public ResponseEntity<?> createBlog(@RequestBody BlogCreateRequest blogCreateRequest) {
         return blogService.createBlog(blogCreateRequest);
     }
@@ -34,13 +33,11 @@ public class BlogController {
     }
 
     @PostMapping(PathConstant.MODIFY)
-    @PreAuthorize(HasAuthorityConstant.MODIFY_BLOG)
     public ResponseEntity<?> updateBlog( @RequestBody BlogModifyRequest blogModifyRequest) {
        return  blogService.modifyBlog(blogModifyRequest);
     }
 
     @DeleteMapping(PathConstant.DELETE+"/"+PathConstant.WRAP_ID)
-    @PreAuthorize(HasAuthorityConstant.DELETE_BLOG)
     public ResponseEntity<?> deleteBlog(@PathVariable("id") Long id) {
         blogService.deleteBlog(id);
     return new ResponseEntity<>(blogService.deleteBlog(id),HttpStatus.OK);
